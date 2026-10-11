@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": "arvo",
+    "name": "ARVO Annual Meeting",
+    "scope": "Internazionale",
+    "subspecialty": "General / Research",
+    "url": "https://www.arvo.org/annual-meeting/",
+    "last_checked": "2026-10-11"
+  },
+  {
+    "id": "escrs",
+    "name": "ESCRS Congress",
+    "scope": "Internazionale",
+    "subspecialty": "Anterior Segment",
+    "url": "https://www.escrs.org/congresses/",
+    "last_checked": "2026-10-11"
+  },
+  {
+    "id": "egs",
+    "name": "EGS Congress",
+    "scope": "Internazionale",
+    "subspecialty": "Glaucoma",
+    "url": "https://www.eugs.org",
+    "last_checked": "2026-10-11"
+  },
+  {
+    "id": "aisg",
+    "name": "AISG Riunione Annuale",
+    "scope": "Nazionale",
+    "subspecialty": "Glaucoma",
+    "url": "https://www.aisg.it",
+    "last_checked": "2026-10-11"
+  },
+  {
+    "id": "aimo",
+    "name": "AIMO Congresso Nazionale",
+    "scope": "Nazionale",
+    "subspecialty": "General / Research",
+    "url": "https://www.oculistiaimo.it",
+    "last_checked": "2026-10-11"
+  }
+]
