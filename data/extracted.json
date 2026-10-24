@@ -7,11 +7,48 @@
     "start": "2027-03-18",
     "end": "2027-03-20",
     "city": "Bari",
-    "country": "Italia",
+    "country": null,
     "venue": "Nuova Fiera del Levante",
     "website": null,
     "source": "https://www.aiccer.it/",
     "deadlines": [],
+    "discarded": []
+  },
+  "apao": {
+    "series_id": "apao",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-03-18",
+    "end": "2027-03-21",
+    "city": "Singapore",
+    "country": "Singapore",
+    "venue": "Suntec Singapore Convention & Exhibition Centre",
+    "website": "https://2027.apaophth.org/",
+    "source": "https://2027.apaophth.org/",
+    "deadlines": [
+      {
+        "type": "abstract_open",
+        "date": "2026-04-15",
+        "quote": "Abstract Submission Opens\nApril 15, 2026",
+        "label": "Abstract Submission Opens",
+        "source": "https://2027.apaophth.org/important-dates/"
+      },
+      {
+        "type": "abstract",
+        "date": "2026-09-23",
+        "quote": "Abstract Submission Closes\nSeptember 23, 2026\n(extended from the original September 7)",
+        "label": "Abstract Submission Closes",
+        "source": "https://2027.apaophth.org/important-dates/"
+      },
+      {
+        "type": "early_bird",
+        "date": "2026-10-12",
+        "quote": "Early Bird Registration Closes\nOctober 12, 2026",
+        "label": "Early Bird Registration Closes",
+        "source": "https://2027.apaophth.org/important-dates/"
+      }
+    ],
     "discarded": []
   },
   "ascrs": {
@@ -27,6 +64,36 @@
     "website": null,
     "source": "https://www.ascrs.org/meetings/Next-Year",
     "deadlines": [],
+    "discarded": []
+  },
+  "asrs": {
+    "series_id": "asrs",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-07-28",
+    "end": "2027-07-31",
+    "city": "San Francisco",
+    "country": null,
+    "venue": null,
+    "website": null,
+    "source": "https://www.asrs.org/annual-meeting",
+    "deadlines": [
+      {
+        "type": "abstract_open",
+        "date": "2026-12-03",
+        "quote": "Abstract submissions will open on December 3, 2026 and close on January 28, 2027.",
+        "label": "Abstract submissions will open on December 3, 2026 and close on January 28, 2027.",
+        "source": "https://www.asrs.org/annual-meeting"
+      },
+      {
+        "type": "abstract",
+        "date": "2027-01-28",
+        "quote": "Abstract submissions will open on December 3, 2026 and close on January 28, 2027.",
+        "label": "Abstract submissions will open on December 3, 2026 and close on January 28, 2027.",
+        "source": "https://www.asrs.org/annual-meeting"
+      }
+    ],
     "discarded": []
   },
   "egs": {
