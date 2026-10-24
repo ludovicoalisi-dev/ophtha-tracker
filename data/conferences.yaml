@@ -38,7 +38,7 @@ series:
           ARVO attiva per sottomettere.
         deadlines:
           - type: abstract
-            date: 2026-12-05
+            date: 2026-12-04
             verified: true
             source: https://www.arvo.org/annual-meeting/
             note: Confermata manualmente il 24/10/2026
