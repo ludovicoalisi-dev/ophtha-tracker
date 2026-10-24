@@ -7,6 +7,7 @@ import hashlib
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -34,6 +35,19 @@ DATE_RE = re.compile(
 )
 
 
+LINK_RE = re.compile(
+    r"abstract|submission|call.for|deadline|important.dates|key.dates|registration|register"
+    r"|iscrizion|scadenz|date.importanti|comunicazion",
+    re.IGNORECASE,
+)
+
+
+@dataclass
+class Page:
+    text: str
+    links: list[str] = field(default_factory=list)
+
+
 @dataclass
 class PageResult:
     series_id: str
@@ -42,10 +56,30 @@ class PageResult:
     is_new: bool = False
     diff: list[str] = field(default_factory=list)
     new_dates: list[str] = field(default_factory=list)
+    text: str | None = None
+    links: list[str] = field(default_factory=list)
 
     @property
     def changed(self) -> bool:
         return bool(self.diff)
+
+
+def _same_site(a: str, b: str) -> bool:
+    def root(url: str) -> str:
+        return ".".join((urlparse(url).hostname or "").split(".")[-2:])
+    return root(a) == root(b)
+
+
+def relevant_links(html: str, base_url: str) -> list[str]:
+    """Link interni che probabilmente portano a pagine su abstract o iscrizioni."""
+    soup = BeautifulSoup(html, "lxml")
+    links = []
+    for a in soup.find_all("a", href=True):
+        url = urljoin(base_url, a["href"]).split("#")[0]
+        if (url.startswith("http") and url != base_url and _same_site(url, base_url)
+                and (LINK_RE.search(a.get_text(" ")) or LINK_RE.search(urlparse(url).path))):
+            links.append(url)
+    return list(dict.fromkeys(links))
 
 
 def html_to_text(html: str) -> str:
@@ -65,13 +99,13 @@ def snapshot_path(directory: Path, series_id: str, url: str) -> Path:
     return directory / f"{series_id}--{digest}.txt"
 
 
-def fetch_text(url: str, session: requests.Session) -> str:
+def fetch_page(url: str, session: requests.Session) -> Page:
     resp = session.get(url, timeout=TIMEOUT, headers={"User-Agent": USER_AGENT})
     resp.raise_for_status()
     content_type = resp.headers.get("Content-Type", "")
     if "html" not in content_type and "text" not in content_type:
         raise ValueError(f"contenuto non testuale ({content_type or 'sconosciuto'})")
-    return html_to_text(resp.text)
+    return Page(text=html_to_text(resp.text), links=relevant_links(resp.text, resp.url))
 
 
 def compare(old: str | None, new: str) -> tuple[list[str], list[str]]:
@@ -91,20 +125,26 @@ def compare(old: str | None, new: str) -> tuple[list[str], list[str]]:
 def check_page(series_id: str, url: str, snapshots: Path, session: requests.Session) -> PageResult:
     result = PageResult(series_id=series_id, url=url)
     try:
-        text = fetch_text(url, session)
-    except requests.HTTPError as exc:
-        result.error = f"HTTP {exc.response.status_code}"
-        return result
-    except (requests.RequestException, ValueError) as exc:
-        result.error = type(exc).__name__ if isinstance(exc, requests.RequestException) else str(exc)
+        page = fetch_page(url, session)
+    except Exception as exc:  # noqa: BLE001 - qualsiasi errore va solo riportato
+        result.error = describe_error(exc)
         return result
 
     path = snapshot_path(snapshots, series_id, url)
     old = path.read_text(encoding="utf-8") if path.exists() else None
     result.is_new = old is None
-    result.diff, result.new_dates = compare(old, text)
-    path.write_text(text, encoding="utf-8")
+    result.diff, result.new_dates = compare(old, page.text)
+    result.text, result.links = page.text, page.links
+    path.write_text(page.text, encoding="utf-8")
     return result
+
+
+def describe_error(exc: Exception) -> str:
+    if isinstance(exc, requests.HTTPError) and exc.response is not None:
+        return f"HTTP {exc.response.status_code}"
+    if isinstance(exc, requests.RequestException):
+        return type(exc).__name__
+    return str(exc)
 
 
 def check_all(targets: list[tuple[str, str]], snapshots: Path) -> list[PageResult]:

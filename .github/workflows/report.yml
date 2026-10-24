@@ -24,15 +24,19 @@ jobs:
       - name: Installa dipendenze
         run: pip install .
 
-      - name: Controlla pagine e genera report
+      - name: Controlla pagine, cerca le scadenze e genera report
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
         run: python -m ophtha_tracker --report report.md
 
-      - name: Salva snapshot delle pagine
+      - name: Salva snapshot e dati estratti
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/snapshots
-          git diff --staged --quiet || (git commit -m "chore: aggiorna snapshot pagine congressi [skip ci]" && git push)
+          [ -f data/extracted.json ] && git add data/extracted.json
+          git diff --staged --quiet || (git commit -m "chore: aggiorna snapshot e dati estratti [skip ci]" && git push)
 
       - name: Pubblica il report come issue
         env:

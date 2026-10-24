@@ -24,6 +24,8 @@ class Deadline:
     date: dt.date
     verified: bool = False
     source: str | None = None
+    origin: str = "manual"  # "manual" | "auto" (estratta da Gemini)
+    quote: str | None = None
 
     @property
     def label(self) -> str:
@@ -43,6 +45,12 @@ class Edition:
     source: str | None = None
     notes: str | None = None
     deadlines: list[Deadline] = field(default_factory=list)
+    origin: str = "manual"
+    auto_fields: set[str] = field(default_factory=set)
+
+    @property
+    def is_auto(self) -> bool:
+        return self.origin == "auto" or bool(self.auto_fields)
 
     @property
     def location(self) -> str:

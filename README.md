@@ -17,10 +17,30 @@ pubblicato come **issue GitHub** il 1° e il 15 di ogni mese.
    assegnata al proprietario del repository (così arriva la notifica email).
    I report precedenti vengono chiusi.
 
-Il tracker **non modifica da solo le date**: quando una pagina cambia, verifichi
-il diff e aggiorni il file YAML. È una scelta voluta: l'estrazione automatica
-da siti eterogenei produce errori silenziosi, e una scadenza sbagliata è peggio
-di una scadenza mancante.
+## Ricerca automatica con Gemini
+
+Se è configurato il secret `GEMINI_API_KEY`, per ogni congresso il tracker
+passa a Gemini il testo delle pagine monitorate (più fino a 3 sottopagine
+trovate tramite link come "abstract", "registration", "iscrizioni") e chiede
+date, sede e scadenze in formato JSON strutturato.
+
+Ogni dato deve essere accompagnato da una **citazione letterale** della
+pagina. Il dato viene scartato se la citazione non compare nel testo
+scaricato o non contiene il giorno e il mese della data. I dati accettati
+finiscono in `data/extracted.json` e nel report con 🤖 (da verificare); i dati
+scritti a mano in `conferences.yaml` hanno sempre la precedenza.
+
+La ricerca viene saltata quando non serve:
+
+| Situazione | Azione |
+|---|---|
+| congresso tra meno di 30 giorni | saltata: deadline quasi certamente scadute |
+| congresso tra più di 400 giorni (~13 mesi) | saltata: deadline di solito non pubblicate |
+| abstract ed early bird già presenti e pagine invariate | saltata |
+| nessuna edizione futura nota | cerca la prossima edizione |
+
+Il modello predefinito è `gemini-flash-latest`; si può cambiare con la
+variabile di repository `GEMINI_MODEL`.
 
 ## Aggiornare i dati
 
@@ -59,6 +79,12 @@ avvia il workflow **Test**, che valida il file.
   python -m ophtha_tracker --validate-only
   pytest
   ```
+
+## Configurazione
+
+1. *Settings → Secrets and variables → Actions → New repository secret*:
+   nome `GEMINI_API_KEY`, valore la chiave di Google AI Studio.
+2. (Facoltativo) nella scheda *Variables*: `GEMINI_MODEL` per cambiare modello.
 
 ## Notifiche
 
