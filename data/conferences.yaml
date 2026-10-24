@@ -338,6 +338,26 @@ series:
       edizioni cadono a marzo. Edizione 2027 non ancora trovata.
     editions: []
 
+  - id: sicsso
+    name: Congresso SICSSO
+    society: Società Italiana Cellule Staminali e Superficie Oculare
+    scope: national
+    subspecialty: Superficie oculare / Cornea
+    website: https://sicsso.org/new/
+    watch:
+      - https://sicsso.org/new/
+    editions:
+      - year: 2027
+        city: Roma
+        country: Italia
+        venue: Shangri-La
+        start: 2027-06-24
+        end: 2027-06-26
+        verified: false
+        source: https://cvs.solutions.iqvia.com/event/detail/EMT-26-12403
+        notes: XXV Congresso. Date e sede da una scheda evento di terze parti (IQVIA), non dal sito SICSSO.
+        deadlines: []
+
   - id: aiccer
     name: Congresso AICCER
     society: Associazione Italiana di Chirurgia della Cataratta e Refrattiva
