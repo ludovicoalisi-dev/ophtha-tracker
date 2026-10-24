@@ -7,7 +7,7 @@
     "start": "2027-03-18",
     "end": "2027-03-20",
     "city": "Bari",
-    "country": null,
+    "country": "Italia",
     "venue": "Nuova Fiera del Levante",
     "website": null,
     "source": "https://www.aiccer.it/",
@@ -94,7 +94,9 @@
         "source": "https://www.asrs.org/annual-meeting"
       }
     ],
-    "discarded": []
+    "discarded": [
+      "late_breaking 2027-06-16: la citazione non contiene la data"
+    ]
   },
   "egs": {
     "series_id": "egs",
@@ -138,7 +140,15 @@
     "venue": "Bella Center",
     "website": null,
     "source": "https://euretina.org/future-meetings/",
-    "deadlines": [],
+    "deadlines": [
+      {
+        "type": "early_bird",
+        "date": "2027-07-30",
+        "quote": "Early Registration Fees available until 30 July",
+        "label": "Early Registration Fees",
+        "source": "https://euretina.org/copenhagen-27/session-submission-terms/"
+      }
+    ],
     "discarded": []
   },
   "macula": {
@@ -170,6 +180,21 @@
     "discarded": [
       "early_bird 2027-04-14: duplicato"
     ]
+  },
+  "sicsso": {
+    "series_id": "sicsso",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-06-24",
+    "end": "2027-06-26",
+    "city": "Rome",
+    "country": "Italy",
+    "venue": null,
+    "website": null,
+    "source": "https://sicsso.org/new/",
+    "deadlines": [],
+    "discarded": []
   },
   "wgc": {
     "series_id": "wgc",
