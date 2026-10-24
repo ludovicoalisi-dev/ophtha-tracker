@@ -5,7 +5,8 @@ import pytest
 import yaml
 
 from ophtha_tracker.models import Deadline, Edition, Series, load_series
-from ophtha_tracker.monitor import PageResult, compare, find_dates, html_to_text
+from ophtha_tracker.monitor import (PageResult, compare, find_dates, html_to_text,
+                                    prune_snapshots, snapshot_path)
 from ophtha_tracker.report import build_report
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -94,3 +95,12 @@ def test_report_lists_deadlines_changes_errors_and_gaps():
     assert "Date nuove nel testo: 6 December 2026" in body
     assert "`HTTP 403`" in body
     assert "**EGS**: nessuna edizione futura inserita" in body
+
+
+def test_prune_snapshots_removes_unwatched_pages(tmp_path):
+    kept = snapshot_path(tmp_path, "arvo", "https://arvo.example")
+    stale = snapshot_path(tmp_path, "arvo", "https://old.example")
+    kept.write_text("a")
+    stale.write_text("b")
+    assert prune_snapshots([("arvo", "https://arvo.example")], tmp_path) == [stale]
+    assert kept.exists() and not stale.exists()

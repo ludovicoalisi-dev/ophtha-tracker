@@ -29,6 +29,16 @@ MAX_EXTRA_PAGES = 3
 MAX_PROMPT_CHARS = 80_000
 CALL_INTERVAL = 5          # secondi tra una chiamata e l'altra (limiti del piano gratuito)
 RETRY_STATUS = {429, 500, 503}
+LABEL_DISTANCE = 300       # caratteri massimi tra etichetta e data nel testo
+
+# Parole che l'etichetta (o la citazione) deve contenere per ciascun tipo di scadenza.
+LABEL_KEYWORDS = {
+    "abstract_open": r"abstract|free paper|e-?poster|comunicazion",
+    "abstract": r"abstract|free paper|e-?poster|comunicazion",
+    "late_breaking": r"late.?breaking",
+    "early_bird": r"early|advance|reduced|ridott|anticipat",
+    "registration": r"regist|iscrizion",
+}
 
 _EDITION_FIELDS = ("start", "end", "city", "country", "venue", "website")
 _MONTH_NAMES = [
@@ -62,8 +72,9 @@ RESPONSE_SCHEMA = {
                     "type": {"type": "STRING", "format": "enum", "enum": list(DEADLINE_TYPES)},
                     "date": {"type": "STRING", "description": "YYYY-MM-DD"},
                     "quote": {"type": "STRING"},
+                    "label": {"type": "STRING"},
                 },
-                "required": ["type", "date", "quote"],
+                "required": ["type", "date", "quote", "label"],
             },
         },
     },
@@ -91,6 +102,11 @@ Estrai SOLO informazioni presenti nel testo qui sotto, relative all'edizione cer
 Regole obbligatorie:
 - ogni "quote" deve essere copiata LETTERALMENTE dal testo (max 200 caratteri)
   e deve contenere la data a cui si riferisce;
+- per ogni scadenza, "label" è la copia LETTERALE dell'etichetta o del titolo
+  che dice di quale scadenza si tratta (es. "Abstract Submissions",
+  "Early Bird Registration"); se etichetta e data sono nella stessa frase,
+  ripeti la frase. Scadenze di corsi, wet lab, premi, borse o video NON sono
+  scadenze abstract: escludile;
 - se l'anno di una scadenza non è scritto, deducilo dal contesto dell'edizione;
 - non inventare né stimare nulla: se un dato non c'è, usa null o ometti la scadenza;
 - ignora le informazioni di edizioni passate;
@@ -203,6 +219,22 @@ def find_quote(quote: str | None, pages: list[tuple[str, str]]) -> str | None:
     return next((url for url, text in pages if q in _norm(text)), None)
 
 
+def label_supports(kind: str, label: str | None, quote: str, source: str,
+                   pages: list[tuple[str, str]]) -> bool:
+    """L'etichetta è nel testo, vicina alla data, e coerente con il tipo di scadenza."""
+    if not label or not re.search(LABEL_KEYWORDS[kind], _norm(f"{label} {quote}")):
+        return False
+    text = _norm(dict(pages)[source])
+    q_pos = text.find(_norm(quote))
+    lab = _norm(label)
+    pos = text.find(lab)
+    while pos != -1:
+        if abs(pos - q_pos) <= LABEL_DISTANCE:
+            return True
+        pos = text.find(lab, pos + 1)
+    return False
+
+
 def date_in_quote(date: dt.date, quote: str) -> bool:
     q = _norm(quote)
     day = rf"(?<!\d)0?{date.day}(?!\d)"
@@ -271,12 +303,15 @@ def validate(raw: dict, pages: list[tuple[str, str]], series_id: str, model: str
             ext.discarded.append(f"{label}: citazione assente dal testo")
         elif not date_in_quote(date, quote):
             ext.discarded.append(f"{label}: la citazione non contiene la data")
+        elif not label_supports(kind, d.get("label"), quote, source, pages):
+            ext.discarded.append(f"{label}: etichetta {d.get('label')!r} assente o non coerente "
+                                 f"con il tipo di scadenza")
         elif last_day and date > last_day:
             ext.discarded.append(f"{label}: successiva alla fine del congresso")
         else:
             seen.add(kind)
-            ext.deadlines.append({"type": kind, "date": date.isoformat(),
-                                  "quote": quote.strip(), "source": source})
+            ext.deadlines.append({"type": kind, "date": date.isoformat(), "quote": quote.strip(),
+                                  "label": d.get("label"), "source": source})
     ext.deadlines.sort(key=lambda d: d["date"])
     return ext
 
