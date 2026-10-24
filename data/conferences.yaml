@@ -346,6 +346,7 @@ series:
     website: https://sicsso.org/new/
     watch:
       - https://sicsso.org/new/
+      - https://sicsso.org/2027/
     editions:
       - year: 2027
         city: Roma
@@ -353,6 +354,7 @@ series:
         venue: Shangri-La
         start: 2027-06-24
         end: 2027-06-26
+        website: https://sicsso.org/2027/
         verified: false
         source: https://cvs.solutions.iqvia.com/event/detail/EMT-26-12403
         notes: XXV Congresso. Date e sede da una scheda evento di terze parti (IQVIA), non dal sito SICSSO.
