@@ -1,0 +1,255 @@
+# Database dei congressi monitorati.
+#
+# Struttura:
+#   series   -> la società / il congresso ricorrente (ARVO, ESCRS, ...)
+#   editions -> la singola edizione annuale, con sede, date e scadenze
+#   watch    -> pagine controllate ogni 15 giorni per rilevare cambiamenti
+#
+# Regole:
+#   - le date sono in formato ISO (YYYY-MM-DD);
+#   - `verified: true` SOLO se il dato è stato letto sul sito ufficiale
+#     del congresso; altrimenti `false` e `source` indica da dove viene;
+#   - tipi di scadenza ammessi: abstract_open, abstract, late_breaking,
+#     early_bird, registration.
+
+series:
+  # ---------------------------------------------------------------- INTERNAZIONALI
+  - id: arvo
+    name: ARVO Annual Meeting
+    society: Association for Research in Vision and Ophthalmology
+    scope: international
+    subspecialty: Ricerca / Generale
+    website: https://www.arvo.org/annual-meeting/
+    watch:
+      - https://www.arvo.org/annual-meeting/
+      - https://www.arvo.org/annual-meeting/abstracts/
+    editions:
+      - year: 2027
+        city: San Diego
+        country: USA
+        venue: San Diego Convention Center
+        start: 2027-05-02
+        end: 2027-05-06
+        verified: false
+        source: https://retinatoday.com/calendar/2027
+        notes: >-
+          Date e sede da calendari di terze parti. Nelle ultime edizioni la
+          deadline abstract è caduta nella prima metà di dicembre e richiede
+          membership ARVO attiva.
+        deadlines: []
+
+  - id: aao
+    name: AAO Annual Meeting
+    society: American Academy of Ophthalmology
+    scope: international
+    subspecialty: Generale
+    website: https://www.aao.org/annual-meeting
+    watch:
+      - https://www.aao.org/annual-meeting
+      - https://www.aao.org/annual-meeting/past-and-future-meetings
+    editions:
+      - year: 2027
+        city: Las Vegas
+        country: USA
+        venue: Venetian Expo & Hotel
+        start: 2027-11-12
+        end: 2027-11-15
+        verified: false
+        source: https://aao.org/annual-meeting/past-and-future-meetings
+        notes: Dato riportato dalla ricerca web sulla pagina ufficiale AAO, non letto direttamente.
+        deadlines: []
+
+  - id: ascrs
+    name: ASCRS Annual Meeting
+    society: American Society of Cataract and Refractive Surgery
+    scope: international
+    subspecialty: Segmento anteriore / Cataratta
+    website: https://annualmeeting.ascrs.org/
+    watch:
+      - https://www.ascrs.org/meetings/Next-Year
+    editions:
+      - year: 2027
+        city: San Diego
+        country: USA
+        venue: San Diego Convention Center
+        start: 2027-04-02
+        end: 2027-04-05
+        verified: false
+        source: https://www.ascrs.org/meetings/Next-Year
+        notes: Dato riportato dalla ricerca web sulla pagina ufficiale ASCRS; la sede viene da sandiego.org.
+        deadlines: []
+
+  - id: escrs
+    name: ESCRS Congress
+    society: European Society of Cataract and Refractive Surgeons
+    scope: international
+    subspecialty: Segmento anteriore / Cataratta
+    website: https://congress.escrs.org/
+    watch:
+      - https://congress.escrs.org/
+      - https://congress.escrs.org/abstracts/
+    editions:
+      - year: 2027
+        city: Madrid
+        country: Spagna
+        venue: IFEMA
+        start: 2027-10-15
+        end: 2027-10-19
+        verified: false
+        source: https://www.expobeds.com/event/escrs/2027
+        notes: Date da listing di terze parti. Nel 2026 la deadline abstract (prorogata) era il 5 marzo.
+        deadlines: []
+
+  - id: euretina
+    name: EURETINA Congress
+    society: European Society of Retina Specialists
+    scope: international
+    subspecialty: Retina
+    website: https://euretina.org/
+    watch:
+      - https://euretina.org/future-meetings/
+    editions:
+      - year: 2027
+        city: null
+        country: null
+        venue: null
+        start: 2027-09-16
+        end: 2027-09-19
+        verified: false
+        source: https://euretina.org/future-meetings/
+        notes: >-
+          Sede indicata come "TBC" sul sito ufficiale (secondo la ricerca web).
+          Nel 2026 la deadline abstract era l'11 marzo; serve membership EURETINA.
+        deadlines: []
+
+  - id: egs
+    name: EGS Congress
+    society: European Glaucoma Society
+    scope: international
+    subspecialty: Glaucoma
+    website: https://www.eugs.org/
+    watch:
+      - https://www.eugs.org/
+    notes: Biennale. L'edizione 2026 si è tenuta a Bruxelles (30 maggio - 2 giugno 2026).
+    editions: []
+
+  - id: wgc
+    name: World Glaucoma Congress
+    society: World Glaucoma Association
+    scope: international
+    subspecialty: Glaucoma
+    website: https://wga.one/
+    watch:
+      - https://wga.one/events
+    editions: []
+
+  - id: soe
+    name: SOE Congress
+    society: European Society of Ophthalmology
+    scope: international
+    subspecialty: Generale
+    website: https://soevision.org/
+    watch:
+      - https://soevision.org/
+    editions: []
+
+  - id: woc
+    name: World Ophthalmology Congress
+    society: International Council of Ophthalmology
+    scope: international
+    subspecialty: Generale
+    website: https://icoph.org/
+    watch:
+      - https://icoph.org/
+    editions: []
+
+  - id: apao
+    name: APAO Congress
+    society: Asia-Pacific Academy of Ophthalmology
+    scope: international
+    subspecialty: Generale
+    website: https://apaophth.org/
+    watch:
+      - https://apaophth.org/
+    editions: []
+
+  - id: asrs
+    name: ASRS Annual Meeting
+    society: American Society of Retina Specialists
+    scope: international
+    subspecialty: Retina
+    website: https://www.asrs.org/
+    watch:
+      - https://www.asrs.org/
+    editions: []
+
+  - id: macula
+    name: Macula Society Annual Meeting
+    society: Macula Society
+    scope: international
+    subspecialty: Retina
+    website: https://www.maculasociety.org/
+    watch:
+      - https://www.maculasociety.org/
+    editions: []
+
+  - id: ags
+    name: AGS Annual Meeting
+    society: American Glaucoma Society
+    scope: international
+    subspecialty: Glaucoma
+    website: https://www.americanglaucomasociety.net/
+    watch:
+      - https://www.americanglaucomasociety.net/
+    editions: []
+
+  # ---------------------------------------------------------------- NAZIONALI
+  - id: soi
+    name: Congresso Nazionale SOI
+    society: Società Oftalmologica Italiana
+    scope: national
+    subspecialty: Generale
+    website: https://www.congressisoi.com/
+    watch:
+      - https://www.congressisoi.com/
+    editions:
+      - year: 2026
+        city: Roma
+        country: Italia
+        venue: null
+        start: 2026-11-19
+        end: 2026-11-21
+        verified: false
+        source: https://www.neventum.com/tradeshows/congressi-soi
+        notes: Date da aggregatori, non confermate sul sito SOI.
+        deadlines: []
+
+  - id: aimo
+    name: Congresso Nazionale AIMO
+    society: Associazione Italiana Medici Oculisti
+    scope: national
+    subspecialty: Generale
+    website: https://www.oculistiaimo.it/
+    watch:
+      - https://www.oculistiaimo.it/
+    editions: []
+
+  - id: aisg
+    name: Congresso AISG
+    society: Associazione Italiana per lo Studio del Glaucoma
+    scope: national
+    subspecialty: Glaucoma
+    website: https://www.aisg.it/
+    watch:
+      - https://www.aisg.it/
+    editions: []
+
+  - id: aiccer
+    name: Congresso AICCER
+    society: Associazione Italiana di Chirurgia della Cataratta e Refrattiva
+    scope: national
+    subspecialty: Segmento anteriore / Cataratta
+    website: https://www.aiccer.it/
+    watch:
+      - https://www.aiccer.it/
+    editions: []
