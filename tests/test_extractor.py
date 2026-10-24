@@ -37,8 +37,10 @@ GOOD = {
     "location_quote": "San Diego Convention Center, San Diego",
     "deadlines": [
         {"type": "abstract", "date": "2026-12-06",
-         "quote": "Abstract deadline: Sunday, December 6, 2026 at 11:59 pm EST."},
-        {"type": "early_bird", "date": "2027-03-15", "quote": "Early registration ends 15/03/2027"},
+         "quote": "Abstract deadline: Sunday, December 6, 2026 at 11:59 pm EST.",
+         "label": "Abstract deadline"},
+        {"type": "early_bird", "date": "2027-03-15", "quote": "Early registration ends 15/03/2027",
+         "label": "Early registration ends 15/03/2027"},
     ],
 }
 
@@ -75,6 +77,34 @@ def test_validate_discards_hallucinations():
     assert "citazione assente" in reasons
     assert "non contiene la data" in reasons
     assert "sede senza riscontro" in reasons
+
+
+def test_validate_rejects_deadline_with_wrong_label():
+    # Caso reale ESCRS 2027: la data era la scadenza dei corsi, non degli abstract.
+    escrs = ("https://escrs.example", "ESCRS Congress 2027\nSUBMIT YOUR INSTRUCTIONAL COURSE NOW!\n"
+             "Instructional Course Submission Extended Deadline\n26 October 2026, 23:59 CET\n")
+    raw = {"found": True, "year": 2027, "deadlines": [
+        {"type": "abstract", "date": "2026-10-26", "quote": "26 October 2026, 23:59 CET",
+         "label": "Instructional Course Submission Extended Deadline"},
+        {"type": "abstract", "date": "2026-10-26", "quote": "26 October 2026, 23:59 CET",
+         "label": "Abstract Submission Deadline"},
+    ]}
+    ext = validate(raw, [escrs], "escrs", "m", TODAY)
+    assert ext.deadlines == []
+    assert all("etichetta" in reason for reason in ext.discarded)
+
+
+def test_validate_accepts_label_on_previous_line():
+    # Caso reale Macula Society: etichetta e data su righe separate.
+    macula = ("https://macula.example", "Awards Nominations Portal\nCloses October 30, 2026\n"
+              "50th Annual Meeting – Abstract Submissions\nSubmission Portal is Now Open\n"
+              "Closes January 15, 2027\n")
+    raw = {"found": True, "year": 2027, "deadlines": [
+        {"type": "abstract", "date": "2027-01-15", "quote": "Closes January 15, 2027",
+         "label": "50th Annual Meeting – Abstract Submissions"},
+    ]}
+    ext = validate(raw, [macula], "macula", "m", TODAY)
+    assert [d["date"] for d in ext.deadlines] == ["2027-01-15"]
 
 
 def test_validate_rejects_implausible_year():
