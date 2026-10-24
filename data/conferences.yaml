@@ -33,10 +33,15 @@ series:
         verified: false
         source: https://retinatoday.com/calendar/2027
         notes: >-
-          Date e sede da calendari di terze parti. Nelle ultime edizioni la
-          deadline abstract è caduta nella prima metà di dicembre e richiede
-          membership ARVO attiva.
-        deadlines: []
+          Date e sede da calendari di terze parti. Il sito ARVO blocca i robot
+          (HTTP 403): le scadenze vanno controllate a mano. Serve membership
+          ARVO attiva per sottomettere.
+        deadlines:
+          - type: abstract
+            date: 2026-12-05
+            verified: true
+            source: https://www.arvo.org/annual-meeting/
+            note: Confermata manualmente il 24/10/2026
 
   - id: aao
     name: AAO Annual Meeting
@@ -47,6 +52,7 @@ series:
     watch:
       - https://www.aao.org/annual-meeting
       - https://www.aao.org/annual-meeting/past-and-future-meetings
+      - https://www.aao.org/annual-meeting/presenter/dates
     editions:
       - year: 2027
         city: Las Vegas
@@ -56,8 +62,18 @@ series:
         end: 2027-11-15
         verified: false
         source: https://aao.org/annual-meeting/past-and-future-meetings
-        notes: Dato riportato dalla ricerca web sulla pagina ufficiale AAO, non letto direttamente.
-        deadlines: []
+        notes: >-
+          Date dalla pagina ufficiale AAO (via ricerca web, non letta direttamente).
+          Le istruction course hanno una finestra separata (dicembre 2026 - gennaio 2027).
+        deadlines:
+          - type: abstract_open
+            date: 2027-03-11
+            verified: false
+            source: https://www.aao.org/annual-meeting/presenter/dates
+          - type: abstract
+            date: 2027-04-13
+            verified: false
+            source: https://www.aao.org/annual-meeting/presenter/dates
 
   - id: ascrs
     name: ASCRS Annual Meeting
@@ -149,17 +165,34 @@ series:
     subspecialty: Generale
     website: https://soevision.org/
     watch:
-      - https://soevision.org/
-    editions: []
+      - https://soe2027.soevision.org/
+    editions:
+      - year: 2027
+        city: Atene
+        country: Grecia
+        venue: Megaron Athens International Conference Centre
+        start: 2027-06-18
+        end: 2027-06-20
+        website: https://soe2027.soevision.org/
+        verified: false
+        source: https://soe2027.soevision.org/
+        notes: Congiunto con ISOT ed EUPO. Date e sede dal sito ufficiale via ricerca web.
+        deadlines:
+          - type: abstract
+            date: 2027-01-19
+            verified: true
+            source: https://soe2027.soevision.org/
+            note: Confermata manualmente il 24/10/2026
 
   - id: woc
     name: World Ophthalmology Congress
     society: International Council of Ophthalmology
     scope: international
     subspecialty: Generale
-    website: https://icoph.org/
+    website: https://icowoc.org/
     watch:
-      - https://icoph.org/
+      - https://icowoc.org/
+    notes: Biennale. WOC 2026 si è tenuto a Praga (26-29 giugno 2026); sede 2028 non ancora trovata.
     editions: []
 
   - id: apao
@@ -169,18 +202,56 @@ series:
     subspecialty: Generale
     website: https://apaophth.org/
     watch:
-      - https://apaophth.org/
-    editions: []
+      - https://2027.apaophth.org/
+    editions:
+      - year: 2027
+        city: Singapore
+        country: Singapore
+        venue: Suntec Singapore Convention & Exhibition Centre
+        start: 2027-03-18
+        end: 2027-03-21
+        website: https://2027.apaophth.org/
+        verified: false
+        source: https://2027.apaophth.org/?p=393
+        notes: Deadline abstract (prorogata) ed early bird già scadute.
+        deadlines:
+          - type: abstract
+            date: 2026-09-16
+            verified: false
+            source: https://2027.apaophth.org/
+          - type: early_bird
+            date: 2026-10-12
+            verified: false
+            source: https://2027.apaophth.org/
 
   - id: asrs
     name: ASRS Annual Meeting
     society: American Society of Retina Specialists
     scope: international
     subspecialty: Retina
-    website: https://www.asrs.org/
+    website: https://www.asrs.org/annual-meeting
     watch:
-      - https://www.asrs.org/
-    editions: []
+      - https://www.asrs.org/annual-meeting
+      - https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications
+    editions:
+      - year: 2027
+        city: San Francisco
+        country: USA
+        venue: Moscone Center
+        start: 2027-07-28
+        end: 2027-07-31
+        verified: false
+        source: https://www.asrs.org/annual-meeting/future-annual-meetings
+        notes: Le date abstract vengono da una pagina ASRS forse non aggiornata; da confermare.
+        deadlines:
+          - type: abstract_open
+            date: 2026-12-03
+            verified: false
+            source: https://www.asrs.org/annual-meeting
+          - type: abstract
+            date: 2027-01-28
+            verified: false
+            source: https://www.asrs.org/annual-meeting
 
   - id: macula
     name: Macula Society Annual Meeting
@@ -199,8 +270,26 @@ series:
     subspecialty: Glaucoma
     website: https://www.americanglaucomasociety.net/
     watch:
-      - https://www.americanglaucomasociety.net/
-    editions: []
+      - https://www.americanglaucomasociety.net/meetings-events/annual-meeting/abstracts
+    editions:
+      - year: 2027
+        city: Tucson
+        country: USA
+        venue: JW Marriott Starr Pass
+        start: 2027-03-04
+        end: 2027-03-07
+        verified: false
+        source: https://www.americanglaucomasociety.net/meetings-events/annual-meeting/abstracts
+        notes: Abstract già chiusi (residenti e studenti entro il 2 ottobre 2026).
+        deadlines:
+          - type: abstract_open
+            date: 2026-09-02
+            verified: false
+            source: https://www.americanglaucomasociety.net/meetings-events/annual-meeting/abstracts
+          - type: abstract
+            date: 2026-10-19
+            verified: false
+            source: https://www.americanglaucomasociety.net/meetings-events/annual-meeting/abstracts
 
   # ---------------------------------------------------------------- NAZIONALI
   - id: soi
@@ -231,6 +320,9 @@ series:
     website: https://www.oculistiaimo.it/
     watch:
       - https://www.oculistiaimo.it/
+    notes: >-
+      Il 16° Congresso Nazionale si è tenuto a Roma l'8-9 ottobre 2026
+      (Auditorium Parco della Musica). Edizione 2027 non ancora annunciata.
     editions: []
 
   - id: aisg
@@ -241,6 +333,9 @@ series:
     website: https://www.aisg.it/
     watch:
       - https://www.aisg.it/
+    notes: >-
+      Il IX Congresso Internazionale si è tenuto a Roma a marzo 2026; le ultime
+      edizioni cadono a marzo. Edizione 2027 non ancora trovata.
     editions: []
 
   - id: aiccer

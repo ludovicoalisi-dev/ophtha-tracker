@@ -147,7 +147,17 @@ def describe_error(exc: Exception) -> str:
     return str(exc)
 
 
+def prune_snapshots(targets: list[tuple[str, str]], snapshots: Path) -> list[Path]:
+    """Elimina gli snapshot di pagine non più monitorate."""
+    keep = {snapshot_path(snapshots, sid, url) for sid, url in targets}
+    stale = [p for p in snapshots.glob("*--*.txt") if p not in keep]
+    for path in stale:
+        path.unlink()
+    return stale
+
+
 def check_all(targets: list[tuple[str, str]], snapshots: Path) -> list[PageResult]:
     snapshots.mkdir(parents=True, exist_ok=True)
+    prune_snapshots(targets, snapshots)
     with requests.Session() as session:
         return [check_page(sid, url, snapshots, session) for sid, url in targets]
