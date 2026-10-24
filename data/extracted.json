@@ -1,0 +1,129 @@
+{
+  "aiccer": {
+    "series_id": "aiccer",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-03-18",
+    "end": "2027-03-20",
+    "city": "Bari",
+    "country": "Italia",
+    "venue": "Nuova Fiera del Levante",
+    "website": null,
+    "source": "https://www.aiccer.it/",
+    "deadlines": [],
+    "discarded": []
+  },
+  "ascrs": {
+    "series_id": "ascrs",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-04-02",
+    "end": "2027-04-05",
+    "city": "San Diego",
+    "country": "United States",
+    "venue": null,
+    "website": null,
+    "source": "https://www.ascrs.org/meetings/Next-Year",
+    "deadlines": [],
+    "discarded": []
+  },
+  "egs": {
+    "series_id": "egs",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2028,
+    "start": "2028-06-03",
+    "end": "2028-06-06",
+    "city": "Berlin",
+    "country": null,
+    "venue": "Estrel",
+    "website": null,
+    "source": "https://www.eugs.org/",
+    "deadlines": [],
+    "discarded": []
+  },
+  "escrs": {
+    "series_id": "escrs",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": null,
+    "end": null,
+    "city": null,
+    "country": null,
+    "venue": null,
+    "website": null,
+    "source": null,
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2026-10-26",
+        "quote": "26 October 2026, 23:59 CET",
+        "source": "https://congress.escrs.org/"
+      }
+    ],
+    "discarded": []
+  },
+  "euretina": {
+    "series_id": "euretina",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-09-16",
+    "end": "2027-09-19",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "venue": "Bella Center",
+    "website": null,
+    "source": "https://euretina.org/future-meetings/",
+    "deadlines": [],
+    "discarded": []
+  },
+  "macula": {
+    "series_id": "macula",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-06-09",
+    "end": "2027-06-12",
+    "city": "Cannes",
+    "country": "France",
+    "venue": "Carlton Hotel",
+    "website": null,
+    "source": "https://www.maculasociety.org/",
+    "deadlines": [
+      {
+        "type": "abstract",
+        "date": "2027-01-15",
+        "quote": "Closes January 15, 2027",
+        "source": "https://www.maculasociety.org/"
+      },
+      {
+        "type": "early_bird",
+        "date": "2027-03-01",
+        "quote": "Ends March 1, 2027",
+        "source": "https://www.maculasociety.org/"
+      }
+    ],
+    "discarded": [
+      "early_bird 2027-04-14: duplicato"
+    ]
+  },
+  "wgc": {
+    "series_id": "wgc",
+    "checked": "2026-10-24",
+    "model": "gemini-flash-latest",
+    "year": 2027,
+    "start": "2027-04-20",
+    "end": "2027-04-23",
+    "city": "Kyoto",
+    "country": "Japan",
+    "venue": null,
+    "website": "https://worldglaucomacongress.org/",
+    "source": "https://wga.one/events",
+    "deadlines": [],
+    "discarded": []
+  }
+}
