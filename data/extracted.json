@@ -1,13 +1,13 @@
 {
   "aiccer": {
     "series_id": "aiccer",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-03-18",
     "end": "2027-03-20",
     "city": "Bari",
-    "country": "Italia",
+    "country": null,
     "venue": "Nuova Fiera del Levante",
     "website": null,
     "source": "https://www.aiccer.it/",
@@ -16,7 +16,7 @@
   },
   "apao": {
     "series_id": "apao",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-03-18",
@@ -30,21 +30,21 @@
       {
         "type": "abstract_open",
         "date": "2026-04-15",
-        "quote": "Abstract Submission Opens\nApril 15, 2026",
+        "quote": "April 15, 2026",
         "label": "Abstract Submission Opens",
         "source": "https://2027.apaophth.org/important-dates/"
       },
       {
         "type": "abstract",
         "date": "2026-09-23",
-        "quote": "Abstract Submission Closes\nSeptember 23, 2026\n(extended from the original September 7)",
+        "quote": "September 23, 2026",
         "label": "Abstract Submission Closes",
         "source": "https://2027.apaophth.org/important-dates/"
       },
       {
         "type": "early_bird",
         "date": "2026-10-12",
-        "quote": "Early Bird Registration Closes\nOctober 12, 2026",
+        "quote": "October 12, 2026",
         "label": "Early Bird Registration Closes",
         "source": "https://2027.apaophth.org/important-dates/"
       }
@@ -53,7 +53,7 @@
   },
   "ascrs": {
     "series_id": "ascrs",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-04-02",
@@ -68,7 +68,7 @@
   },
   "asrs": {
     "series_id": "asrs",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-07-28",
@@ -89,9 +89,9 @@
       {
         "type": "abstract",
         "date": "2027-01-28",
-        "quote": "Abstract submissions will open on December 3, 2026 and close on January 28, 2027.",
-        "label": "Abstract submissions will open on December 3, 2026 and close on January 28, 2027.",
-        "source": "https://www.asrs.org/annual-meeting"
+        "quote": "January 28, 2027\nAbstract deadline for papers/papers on demand, posters, cases, and films",
+        "label": "Abstract deadline for papers/papers on demand, posters, cases, and films",
+        "source": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications"
       }
     ],
     "discarded": [
@@ -115,7 +115,7 @@
   },
   "escrs": {
     "series_id": "escrs",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": null,
@@ -130,7 +130,7 @@
   },
   "euretina": {
     "series_id": "euretina",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-09-16",
@@ -140,15 +140,7 @@
     "venue": "Bella Center",
     "website": null,
     "source": "https://euretina.org/future-meetings/",
-    "deadlines": [
-      {
-        "type": "early_bird",
-        "date": "2027-07-30",
-        "quote": "Early Registration Fees available until 30 July",
-        "label": "Early Registration Fees",
-        "source": "https://euretina.org/copenhagen-27/session-submission-terms/"
-      }
-    ],
+    "deadlines": [],
     "discarded": []
   },
   "macula": {
@@ -183,22 +175,24 @@
   },
   "sicsso": {
     "series_id": "sicsso",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-06-24",
     "end": "2027-06-26",
     "city": "Rome",
     "country": "Italy",
-    "venue": null,
+    "venue": "Shangri-La",
     "website": null,
-    "source": "https://sicsso.org/new/",
+    "source": "https://sicsso.org/2027/",
     "deadlines": [],
-    "discarded": []
+    "discarded": [
+      "abstract 2026-11-18: etichetta 'CALL FOR\\nORAL PRESENTATION & POSTER' assente o non coerente con il tipo di scadenza"
+    ]
   },
   "wgc": {
     "series_id": "wgc",
-    "checked": "2026-10-24",
+    "checked": "2026-11-01",
     "model": "gemini-flash-latest",
     "year": 2027,
     "start": "2027-04-20",
